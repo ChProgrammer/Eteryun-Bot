@@ -6,7 +6,6 @@ class Mute extends Command {
     constructor(client) {
         super(client)
         this.guildOnly = true
-        this.requiredArgs = false
         this.category = 'Diversão'
         this.description = 'Tocar ou adicionar uma música a fila de espera.'
         this.usage = ['url/nome']
@@ -28,7 +27,6 @@ class Mute extends Command {
             })
             .on('error', error => console.log(error))
 
-        dispatcher.setVolumeLogarithmic(serverQueue.volume / 5)
         this.sendEmbed(serverQueue.textChannel, `Tocando: **${song.title}**`)
     }
 
@@ -55,7 +53,6 @@ class Mute extends Command {
                     voiceChannel: voiceChannel,
                     connection: null,
                     songs: [],
-                    volume: 5,
                     playing: true,
                 }
                 queue.playlist.set(message.guild.id, queueContruct)

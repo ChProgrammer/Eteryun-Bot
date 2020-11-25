@@ -3,7 +3,7 @@ const moment = require('moment-timezone')
 
 module.exports = async function onMemberGuildAdd(member) {
   const daysSinceCreation = moment().diff(moment(member.user.createdAt), 'days')
-  //const isDefaultAvatar = member.user.displayAvatarURL.startsWith('https://discordapp.com/')
+  //const isDefaultAvatar = message.member.user.displayAvatarURL().startsWith('https://discordapp.com/')
   if (daysSinceCreation < 30)
     return (() => {
       member.send('Olá! você foi kickado automaticamente por conter menos de 30 dias de conta').catch()
