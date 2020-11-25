@@ -1,0 +1,89 @@
+{
+    "token": "TOKEN HERE",
+    "prefix": "!",
+    "status": "Eteryun Network",
+    "color": "#7c2ae8",
+    "channels": {
+        "giveaway": "749652263282409612",
+        "sugestions": {
+            "make": "735389560707743785",
+            "admin": "746017130104750152"
+        },
+        "welcome": "729376346869858318",
+        "ban": "729630230376874054",
+        "mute": "729630230376874054",
+        "commands": "745777707421401189",
+        "forum": {
+            "open": "741671047958495320",
+            "log": "743152187189755984"
+        },
+        "tags": {
+            "request": "729386909100408903",
+            "admin": "745753753356992613",
+            "response": "736047158993616978"
+        }
+    },
+    "sugestions": {
+        "minVote": 2,
+        "minPercentagem": 60
+    },
+    "forum": {
+        "rolesToMark": [
+            "729389248339247104",
+            "729385336916148304",
+            "729385845131313184"
+        ],
+        "category": "741670978723119224"
+    },
+    "mutedRole": "731664824408473630",
+    "welcome": {
+        "roleToset": "729392469472444570",
+        "message": {
+            "color": "#7c2ae8",
+            "title": ":dancing_parrot: Opaa :dancing_parrot:",
+            "image": "https://media.giphy.com/media/UQPhrdc2jYJ3twr2S9/giphy.gif",
+            "description": [
+                "Bem vindo ao servidor {guild} **{member}**.",
+                "",
+                "Esse é um servidor privado que estou montando com uma galera",
+                "",
+                "Com o objetivo de montar um servidor survival no estilo mmorpg"
+            ],
+            "fields": [
+                {
+                    "name": "Atenção",
+                    "value": "Por Favor, leia as regras <#729385003154276352> e siga todas para evitar Punições!"
+                },
+                {
+                    "name": "Pedir Tag",
+                    "value": "Acesse <#729386909100408903> caso queira umas das Tags disponíveis em nosso discord. \n\nCaso tenha alguma dúvida, chame um <@&729389248339247104> ou <@&729385845131313184>"
+                }
+            ]
+        }
+    },
+    "tagsrequest": {
+        "messageId": "729709054175346762",
+        "tags": [
+            {
+                "name": "💻 ┃ Developers",
+                "emoji": "🖥",
+                "id": "729389068416319507"
+            },
+            {
+                "name": "🛠 ┃ Builder",
+                "emoji": "⚒",
+                "id": "729389014129311827"
+            },
+            {
+                "name": "🖌 ┃ Design",
+                "emoji": "🎨",
+                "id": "729389138369052783"
+            },
+            {
+                "name": "📖 ┃ Escritor",
+                "emoji": "📖",
+                "id": "729623425550909530"
+            }
+        ]
+    }
+}

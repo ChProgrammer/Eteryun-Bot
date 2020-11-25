@@ -1,0 +1,10 @@
+const cooldown = new Set()
+const requestRole = new Map()
+const muteded = new Map()
+const forum = new Map()
+const giveaway = new Map()
+exports.cooldown = cooldown
+exports.requestRole = requestRole
+exports.muteded = muteded
+exports.forum = forum
+exports.giveaway = giveaway
