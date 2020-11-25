@@ -1,3 +1,5 @@
+const Discord = require('discord.js')
+
 class Command {
   constructor(client) {
     this.client = client
@@ -15,6 +17,39 @@ class Command {
 
   async run() {
     throw new Error(`Function run undefined in ${this.constructor.name}.`)
+  }
+
+  async sendEmbed(channel, title = '', description = '') {
+    const embed = new Discord.MessageEmbed()
+      .setColor(this.client.config.color)
+      .setTitle(title)
+      .setDescription(description)
+
+    await channel.send(embed)
+  }
+
+  async sendQuestion(title, question, channel, author, skip = false) {
+    return new Promise((resolve, reject) => {
+      const embed = new Discord.MessageEmbed()
+        .setColor(this.client.config.color)
+        .setTitle(title)
+        .setDescription(question)
+
+      if (skip) {
+        embed.setFooter('Deseja pular está opção? Digite: \'pular\'')
+      }
+
+      channel.send(embed).then((msg) => {
+        channel.awaitMessages(m => m.author.id === author.id, {
+          max: 1,
+          time: 300000
+        })
+          .then(collected =>
+            resolve(collected.first().content)
+          ).catch(error =>
+            reject(error))
+      })
+    })
   }
 
   getUsage(prefix) {
@@ -38,8 +73,8 @@ class Command {
   async _run(message, args, content) {
     if (!message.guild && this.guildOnly) return
 
-    if (message.channel.id !== this.client.config.channels.commands){
-      if (!message.channel.permissionsFor(message.member).has('ADMINISTRATOR')){
+    if (message.channel.id !== this.client.config.channels.commands) {
+      if (!message.channel.permissionsFor(message.member).has('ADMINISTRATOR')) {
         return message.delete()
       }
     }

@@ -1,5 +1,4 @@
 const Command = require('../strucutres/Command')
-const queue = require('../utils/Queue')
 const Discord = require('discord.js')
 
 class Kick extends Command {

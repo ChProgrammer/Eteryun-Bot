@@ -48,38 +48,6 @@ class Sorteio extends Command {
         }
     }
 
-    async sendEmbed(title, description, channel) {
-        const embed = new Discord.MessageEmbed()
-            .setColor(this.client.config.color)
-            .setTitle(title)
-            .setDescription(description)
-        channel.send(embed)
-    }
-
-    async sendQuestion(question, channel, author, skip = false) {
-        return new Promise((resolve, reject) => {
-            const embed = new Discord.MessageEmbed()
-                .setColor(this.client.config.color)
-                .setTitle(`Sorteio`)
-                .setDescription(question)
-
-            if (skip) {
-                embed.setFooter('Deseja pular está opção? Digite: \'pular\'')
-            }
-
-            channel.send(embed).then((msg) => {
-                channel.awaitMessages(m => m.author.id === author.id, {
-                    max: 1,
-                    time: 300000
-                })
-                    .then(collected =>
-                        resolve(collected.first().content)
-                    ).catch(error =>
-                        reject(error))
-            })
-        })
-    }
-
     async selectWinners(giveaway) {
         let selectedWinners = []
         console.log('Selecionando sorteados')
@@ -176,16 +144,16 @@ class Sorteio extends Command {
                 let giveaway = queue.giveaway.get(id)
                 if (giveaway) {
                     if (giveaway.status != 0)
-                        return this.sendEmbed('Error', 'Sorteio já ocorrido', channel)
+                        return this.sendEmbed(channel, 'Error', 'Sorteio já ocorrido')
 
                     clearTimeout(giveaway.timeout)
                     try {
                         await giveaway.message.delete()
                     } catch (error) { }
                     queue.giveaway.delete(id)
-                    return this.sendEmbed('Sucesso', 'Sorteio apago', channel)
+                    return this.sendEmbed(channel, 'Sucesso', 'Sorteio apago')
                 } else {
-                    return this.sendEmbed('Error', 'Sorteio inexistente', channel)
+                    return this.sendEmbed(channel, 'Error', 'Sorteio inexistente')
                 }
             } else if (args[0] == 'draw') {
                 let id = args[1]
@@ -193,9 +161,9 @@ class Sorteio extends Command {
                 if (giveaway) {
                     this.giveaway(id)
                     clearTimeout(giveaway.timeout)
-                    return this.sendEmbed('Sucesso', 'Sorteando...', channel)
+                    return this.sendEmbed(channel, 'Sucesso', 'Sorteando...')
                 } else {
-                    return this.sendEmbed('Error', 'Sorteio inexistente', channel)
+                    return this.sendEmbed(channel, 'Error', 'Sorteio inexistente')
                 }
             }
         }
@@ -216,7 +184,7 @@ class Sorteio extends Command {
         try {
             let thumbmail
             do {
-                thumbmail = await this.sendQuestion('> Cole o link da Thumbmail:', channel, author, true)
+                thumbmail = await this.sendQuestion('Sorteio', '> Cole o link da Thumbmail:', channel, author, true)
             } while (!(this.validURL(thumbmail) || thumbmail == 'pular'))
             if (thumbmail != 'pular') {
                 embed.setThumbnail(thumbmail)
@@ -224,30 +192,30 @@ class Sorteio extends Command {
 
             let image
             do {
-                image = await this.sendQuestion('> Cole o link da Imagem:', channel, author, true)
+                image = await this.sendQuestion('Sorteio', '> Cole o link da Imagem:', channel, author, true)
             } while (!(this.validURL(image) || image == 'pular'))
             if (image != 'pular') {
                 embed.setImage(image)
             }
 
-            const title = await this.sendQuestion('> Digite o Titulo do sorteio:', channel, author)
+            const title = await this.sendQuestion('Sorteio', '> Digite o Titulo do sorteio:', channel, author)
             embed.setTitle(title)
 
-            const description = await this.sendQuestion('> Digite a descrição do sorteio:', channel, author)
+            const description = await this.sendQuestion('Sorteio', '> Digite a descrição do sorteio:', channel, author)
 
             let rules = ''
             do {
-                rules = await this.sendQuestion('> Digite as regras do sorteio:', channel, author, true)
+                rules = await this.sendQuestion('Sorteio', '> Digite as regras do sorteio:', channel, author, true)
             } while ((rules == 'pular' || rules == ''))
 
             let totalWinners
             do {
-                totalWinners = parseInt(await this.sendQuestion('> Digite o total de ganhadores:', channel, author))
+                totalWinners = parseInt(await this.sendQuestion('Sorteio', '> Digite o total de ganhadores:', channel, author))
             } while (!(!isNaN(totalWinners) && totalWinners > 0))
 
             let duration
             do {
-                duration = parseInt(await this.sendQuestion('> Digite a duração em minutos:', channel, author))
+                duration = parseInt(await this.sendQuestion('Sorteio', '> Digite a duração em minutos:', channel, author))
             } while (!(!isNaN(duration) && duration > 0))
 
             embed.addFields([
@@ -298,22 +266,21 @@ class Sorteio extends Command {
                         let data = endTime.format('DD/MM/YYYY')
                         let hours = endTime.format('HH:mm:ss')
                         embed.addField('> Data de finalização:', `➔ Dia ${data} ás ${hours}`, true)
-                        console.log(embed)
                         channelGiveaway.send(embed).then(message => {
                             message.react('🎉')
                             const timeout = setTimeout(() => {
                                 this.giveaway(message.id)
                             }, (60000 * duration))
                             queue.giveaway.set(message.id, { message, status: 0, channel: channelGiveaway, timeout, title, description, thumbmail, image, totalWinners, endTime, participants: [] })
-                        }).catch(error => this.sendEmbed('Error', 'Não foi possivel criar o sorteio.', channel))
+                        }).catch(error => this.sendEmbed(channel, 'Error', 'Não foi possivel criar o sorteio.'))
                     }
                 })
                 .catch(collected => {
-                    this.sendEmbed('Error', 'Seu tempo expirou', channel)
+                    this.sendEmbed(channel, 'Error', 'Seu tempo expirou')
                 })
         } catch (error) {
             console.log(error)
-            this.sendEmbed('Error', 'Seu tempo expirou', channel)
+            this.sendEmbed(channel, 'Error', 'Seu tempo expirou')
         }
     }
 }

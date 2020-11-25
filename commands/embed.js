@@ -37,38 +37,6 @@ class Embed extends Command {
         }
     }
 
-    async sendQuestion(question, channel, author, skip = false) {
-        return new Promise((resolve, reject) => {
-            const embed = new Discord.MessageEmbed()
-                .setColor(this.client.config.color)
-                .setTitle(`Embed`)
-                .setDescription(question)
-
-            if (skip) {
-                embed.setFooter('Deseja pular está opção? Digite: \'pular\'')
-            }
-
-            channel.send(embed).then((msg) => {
-                channel.awaitMessages(m => m.author.id === author.id, {
-                    max: 1,
-                    time: 300000
-                })
-                    .then(collected =>
-                        resolve(collected.first().content)
-                    ).catch(error =>
-                        reject(error))
-            })
-        })
-    }
-
-    async sendEmbed(title, description, channel) {
-        const embed = new Discord.MessageEmbed()
-            .setColor(this.client.config.color)
-            .setTitle(title)
-            .setDescription(description)
-        channel.send(embed)
-    }
-
     async run(message, args, { prefix }) {
         const channel = message.channel
         const author = message.author
@@ -86,7 +54,7 @@ class Embed extends Command {
         try {
             let color
             do {
-                color = await this.sendQuestion('> Digite a cor do embed:', channel, author, true)
+                color = await this.sendQuestion('Embed', '> Digite a cor do embed:', channel, author, true)
             } while (!(this.validHexColor(color) || color == 'pular'))
             if (color != 'pular') {
                 embed.setColor(color)
@@ -94,7 +62,7 @@ class Embed extends Command {
 
             let thumbmail
             do {
-                thumbmail = await this.sendQuestion('> Cole o link da Thumbmail:', channel, author, true)
+                thumbmail = await this.sendQuestion('Embed', '> Cole o link da Thumbmail:', channel, author, true)
             } while (!(this.validURL(thumbmail) || thumbmail == 'pular'))
             if (thumbmail != 'pular') {
                 embed.setThumbnail(thumbmail)
@@ -102,32 +70,32 @@ class Embed extends Command {
 
             let image
             do {
-                image = await this.sendQuestion('> Cole o link da Imagem:', channel, author, true)
+                image = await this.sendQuestion('Embed', '> Cole o link da Imagem:', channel, author, true)
             } while (!(this.validURL(image) || image == 'pular'))
             if (image != 'pular') {
                 embed.setImage(image)
             }
 
-            let title = await this.sendQuestion('> Digite o titulo:', channel, author, true)
+            let title = await this.sendQuestion('Embed', '> Digite o titulo:', channel, author, true)
             if (title != 'pular')
                 embed.setTitle(title)
 
-            let description = await this.sendQuestion('> Digite a descrição:', channel, author, true)
+            let description = await this.sendQuestion('Embed', '> Digite a descrição:', channel, author, true)
             if (description != 'pular')
                 embed.setDescription(description)
 
             let haveAuthor, authorName, authorIcon, authorUrl
             do {
-                haveAuthor = await this.sendQuestion('> Deseja adicionar um autor? (Sim/Não)', channel, author)
+                haveAuthor = await this.sendQuestion('Embed', '> Deseja adicionar um autor? (Sim/Não)', channel, author)
             } while (!(haveAuthor == 'Sim' || haveAuthor == 'Não'))
 
             if (haveAuthor == 'Sim') {
-                authorName = await this.sendQuestion('> Digite o nome do author', channel, author)
+                authorName = await this.sendQuestion('Embed', '> Digite o nome do author', channel, author)
                 do {
-                    authorIcon = await this.sendQuestion('> Cole o link do icone do author:', channel, author, true)
+                    authorIcon = await this.sendQuestion('Embed', '> Cole o link do icone do author:', channel, author, true)
                 } while (!(this.validURL(authorUrl) || authorIcon == 'pular'))
                 do {
-                    authorUrl = await this.sendQuestion('> Cole o link do site do author:', channel, author, true)
+                    authorUrl = await this.sendQuestion('Embed', '> Cole o link do site do author:', channel, author, true)
                 } while (!(this.validURL(authorUrl) || authorUrl == 'pular'))
 
                 embed.setAuthor(authorName, authorIcon == 'pular' ? '' : authorIcon, authorUrl == 'pular' ? '' : authorUrl)
@@ -135,13 +103,13 @@ class Embed extends Command {
 
             let haveFooter, footerText, footerIcon
             do {
-                haveFooter = await this.sendQuestion('> Deseja adicionar um rodapé? (Sim/Não)', channel, author)
+                haveFooter = await this.sendQuestion('Embed', '> Deseja adicionar um rodapé? (Sim/Não)', channel, author)
             } while (!(haveFooter == 'Sim' || haveFooter == 'Não'))
 
             if (haveFooter == 'Sim') {
-                footerText = await this.sendQuestion('> Digite o texto do rodapé', channel, author)
+                footerText = await this.sendQuestion('Embed', '> Digite o texto do rodapé', channel, author)
                 do {
-                    footerIcon = await this.sendQuestion('> Cole o link do icone do rodapé:', channel, author, true)
+                    footerIcon = await this.sendQuestion('Embed', '> Cole o link do icone do rodapé:', channel, author, true)
                 } while (!(this.validURL(footerIcon) || footerIcon == 'pular'))
 
                 embed.setFooter(footerText, footerIcon == 'pular' ? '' : footerIcon)
@@ -151,7 +119,7 @@ class Embed extends Command {
 
         } catch (error) {
             console.log(error)
-            this.sendEmbed('Error', 'Seu tempo expirou', channel)
+            this.sendEmbed(channel, 'Error', 'Seu tempo expirou')
         }
     }
 }
