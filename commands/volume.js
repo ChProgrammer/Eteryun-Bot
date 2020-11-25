@@ -26,9 +26,9 @@ class Mute extends Command {
         if (isNaN(volume))
             return message.channel.send(this.getUsage(prefix, true))
 
-        volume = volume / 100 > 1 ? 1 : volume / 100
-        serverQueue.connection.dispatcher.setVolume(volume)
-        this.sendEmbed(channel, `Volume da música setado para ${volume}`)
+        const percentualVolume = volume / 100 > 2 ? 2 : volume / 100
+        serverQueue.connection.dispatcher.setVolume(percentualVolume)
+        this.sendEmbed(channel, `Volume da música setado para ${volume}%`)
     }
 }
 
