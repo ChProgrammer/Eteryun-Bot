@@ -22,7 +22,7 @@ class Mute extends Command {
         if (!voiceChannel)
             return this.sendEmbed(channel, 'Você tem que estar em um canal de voz para parar a música!')
 
-        const volume = parseFloat(args[0])
+        let volume = parseFloat(args[0])
         if (isNaN(volume))
             return message.channel.send(this.getUsage(prefix, true))
 
