@@ -185,16 +185,16 @@ class Sorteio extends Command {
             let thumbmail
             do {
                 thumbmail = await this.sendQuestion('Sorteio', '> Cole o link da Thumbmail:', channel, author, true)
-            } while (!(this.validURL(thumbmail) || thumbmail == 'pular'))
-            if (thumbmail != 'pular') {
+            } while (!(this.validURL(thumbmail) || thumbmail.toLowerCase() == 'pular'))
+            if (thumbmail.toLowerCase() != 'pular') {
                 embed.setThumbnail(thumbmail)
             }
 
             let image
             do {
                 image = await this.sendQuestion('Sorteio', '> Cole o link da Imagem:', channel, author, true)
-            } while (!(this.validURL(image) || image == 'pular'))
-            if (image != 'pular') {
+            } while (!(this.validURL(image) || image.toLowerCase() == 'pular'))
+            if (image.toLowerCase() != 'pular') {
                 embed.setImage(image)
             }
 
@@ -206,7 +206,7 @@ class Sorteio extends Command {
             let rules = ''
             do {
                 rules = await this.sendQuestion('Sorteio', '> Digite as regras do sorteio:', channel, author, true)
-            } while ((rules == 'pular' || rules == ''))
+            } while ((rules.toLowerCase() == 'pular' || rules == ''))
 
             let totalWinners
             do {
