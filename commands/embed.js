@@ -55,64 +55,64 @@ class Embed extends Command {
             let color
             do {
                 color = await this.sendQuestion('Embed', '> Digite a cor do embed:', channel, author, true)
-            } while (!(this.validHexColor(color) || color == 'pular'))
-            if (color != 'pular') {
+            } while (!(this.validHexColor(color) || color.toLowerCase() == 'pular'))
+            if (color.toLowerCase() != 'pular') {
                 embed.setColor(color)
             }
 
             let thumbmail
             do {
                 thumbmail = await this.sendQuestion('Embed', '> Cole o link da Thumbmail:', channel, author, true)
-            } while (!(this.validURL(thumbmail) || thumbmail == 'pular'))
-            if (thumbmail != 'pular') {
+            } while (!(this.validURL(thumbmail) || thumbmail.toLowerCase() == 'pular'))
+            if (thumbmail.toLowerCase() != 'pular') {
                 embed.setThumbnail(thumbmail)
             }
 
             let image
             do {
                 image = await this.sendQuestion('Embed', '> Cole o link da Imagem:', channel, author, true)
-            } while (!(this.validURL(image) || image == 'pular'))
-            if (image != 'pular') {
+            } while (!(this.validURL(image) || image.toLowerCase() == 'pular'))
+            if (image.toLowerCase() != 'pular') {
                 embed.setImage(image)
             }
 
             let title = await this.sendQuestion('Embed', '> Digite o titulo:', channel, author, true)
-            if (title != 'pular')
+            if (title.toLowerCase() != 'pular')
                 embed.setTitle(title)
 
             let description = await this.sendQuestion('Embed', '> Digite a descrição:', channel, author, true)
-            if (description != 'pular')
+            if (description.toLowerCase() != 'pular')
                 embed.setDescription(description)
 
             let haveAuthor, authorName, authorIcon, authorUrl
             do {
                 haveAuthor = await this.sendQuestion('Embed', '> Deseja adicionar um autor? (Sim/Não)', channel, author)
-            } while (!(haveAuthor == 'Sim' || haveAuthor == 'Não'))
+            } while (!(haveAuthor.toLowerCase() == 'sim' || haveAuthor.toLowerCase() == 'não'))
 
-            if (haveAuthor == 'Sim') {
+            if (haveAuthor.toLowerCase() == 'sim') {
                 authorName = await this.sendQuestion('Embed', '> Digite o nome do author', channel, author)
                 do {
                     authorIcon = await this.sendQuestion('Embed', '> Cole o link do icone do author:', channel, author, true)
-                } while (!(this.validURL(authorUrl) || authorIcon == 'pular'))
+                } while (!(this.validURL(authorUrl) || authorIcon.toLowerCase() == 'pular'))
                 do {
                     authorUrl = await this.sendQuestion('Embed', '> Cole o link do site do author:', channel, author, true)
-                } while (!(this.validURL(authorUrl) || authorUrl == 'pular'))
+                } while (!(this.validURL(authorUrl) || authorUrl.toLowerCase() == 'pular'))
 
-                embed.setAuthor(authorName, authorIcon == 'pular' ? '' : authorIcon, authorUrl == 'pular' ? '' : authorUrl)
+                embed.setAuthor(authorName, authorIcon.toLowerCase() == 'pular' ? '' : authorIcon, authorUrl.toLowerCase() == 'pular' ? '' : authorUrl)
             }
 
             let haveFooter, footerText, footerIcon
             do {
                 haveFooter = await this.sendQuestion('Embed', '> Deseja adicionar um rodapé? (Sim/Não)', channel, author)
-            } while (!(haveFooter == 'Sim' || haveFooter == 'Não'))
+            } while (!(haveFooter.toLowerCase() == 'sim' || haveFooter.toLowerCase() == 'não'))
 
-            if (haveFooter == 'Sim') {
+            if (haveFooter.toLowerCase() == 'sim') {
                 footerText = await this.sendQuestion('Embed', '> Digite o texto do rodapé', channel, author)
                 do {
                     footerIcon = await this.sendQuestion('Embed', '> Cole o link do icone do rodapé:', channel, author, true)
-                } while (!(this.validURL(footerIcon) || footerIcon == 'pular'))
+                } while (!(this.validURL(footerIcon) || footerIcon.toLowerCase() == 'pular'))
 
-                embed.setFooter(footerText, footerIcon == 'pular' ? '' : footerIcon)
+                embed.setFooter(footerText, footerIcon.toLowerCase() == 'pular' ? '' : footerIcon)
             }
 
             await channelEmbed.send(embed)
