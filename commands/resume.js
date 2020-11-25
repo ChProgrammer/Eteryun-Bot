@@ -2,7 +2,7 @@ const Command = require('../strucutres/Command')
 const queue = require('../utils/Queue')
 const ytdl = require('ytdl-core')
 
-class Mute extends Command {
+class Resume extends Command {
     constructor(client) {
         super(client)
         this.guildOnly = true
@@ -26,4 +26,4 @@ class Mute extends Command {
     }
 }
 
-module.exports = Mute
+module.exports = Resume

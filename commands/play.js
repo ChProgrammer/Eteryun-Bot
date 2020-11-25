@@ -3,7 +3,7 @@ const queue = require('../utils/Queue')
 const ytdl = require('ytdl-core')
 const YouTubeAPI = require('simple-youtube-api')
 
-class Mute extends Command {
+class Play extends Command {
     constructor(client) {
         super(client)
         this.guildOnly = true
@@ -102,4 +102,4 @@ class Mute extends Command {
     }
 }
 
-module.exports = Mute
+module.exports = Play
