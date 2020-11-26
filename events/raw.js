@@ -14,10 +14,10 @@ module.exports = async function onraw(event) {
         const channel = this.channels.cache.get(event.d.channel_id)
         console.log(this.config.channels.sugestions.make.find(item => item == event.d.channel_id))
 
-        if (event.d.emoji.name == 'eteryun') {
+        if (event.d.emoji.name == '🎉') {
             if (queue.giveaway.has(event.d.message_id)) {
                 const giveaway = queue.giveaway.get(event.d.message_id)
-                giveaway.participants.push(member)
+                giveaway.participants.push(event.d.user_id)
                 queue.giveaway.set(event.d.message_id, giveaway)
             }
         } else if (event.d.emoji.name == '🔒') {
