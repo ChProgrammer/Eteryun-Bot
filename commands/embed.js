@@ -84,6 +84,22 @@ class Embed extends Command {
             if (description.toLowerCase() != 'pular')
                 embed.setDescription(description)
 
+            let fieldInLine, continuar
+            do {
+                fieldInLine = await this.sendQuestion('Embed', '> Deseja adicionar um campo InLine? (Sim/Não)', channel, author)
+            } while (!(fieldInLine.toLowerCase() == 'sim' || fieldInLine.toLowerCase() == 'não'))
+
+            if (fieldInLine.toLowerCase() == 'sim'){
+                do {
+                    let inlineName = await this.sendQuestion('Embed', '> Digite o nome do campo Inline:', channel, author, true)
+                    let inline = await this.sendQuestion('Embed', '> Digite a mensagem do campo Inline:', channel, author, true)
+                    if (inlineName != 'pular' || inline.toLowerCase != 'pular'){
+                        embed.addField(inlineName, inline, true)
+                    }
+                    continuar = await this.sendQuestion('Embed', '> Deseja adicionar outro inline? (Sim/Não)', channel, author)
+                } while (continuar.toLowerCase() != 'não')
+            }
+
             let haveAuthor, authorName, authorIcon, authorUrl
             do {
                 haveAuthor = await this.sendQuestion('Embed', '> Deseja adicionar um autor? (Sim/Não)', channel, author)
