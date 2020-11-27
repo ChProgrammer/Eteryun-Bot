@@ -18,7 +18,7 @@ class Recipe extends Command {
         this.guildOnly = true
         this.requiredArgs = true
         this.category = 'Diversão'
-        this.description = 'Despausar a música atual'
+        this.description = 'Ver craft de um item'
         this.usage = 'item'
     }
 
@@ -50,7 +50,12 @@ class Recipe extends Command {
         else if (!item)
             return this.sendEmbed(channel, '', 'Nenhum item encontrado com esse nome')
 
-        let recipe = recipes[item.id][0]
+        let recipe = recipes[item.id]
+
+        if (!recipe)
+            return this.sendEmbed(channel, '', `Não foi possivel encontrar nenhuma recipe para **${item.displayName}**`)
+
+        recipe = recipe[0]
 
         if (!recipe.inShape)
             return this.sendEmbed(channel, '', `Não foi possivel encontrar nenhuma recipe para **${item.displayName}**`)
