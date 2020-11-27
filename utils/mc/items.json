@@ -91,49 +91,49 @@
   },
   {
     "id": 15,
-    "displayName": "Oak Planks",
+    "displayName": "Oak Wood Plank",
     "name": "oak_planks",
     "stackSize": 64
   },
   {
     "id": 16,
-    "displayName": "Spruce Planks",
+    "displayName": "Spruce Wood Plank",
     "name": "spruce_planks",
     "stackSize": 64
   },
   {
     "id": 17,
-    "displayName": "Birch Planks",
+    "displayName": "Birch Wood Plank",
     "name": "birch_planks",
     "stackSize": 64
   },
   {
     "id": 18,
-    "displayName": "Jungle Planks",
+    "displayName": "Jungle Wood Plank",
     "name": "jungle_planks",
     "stackSize": 64
   },
   {
     "id": 19,
-    "displayName": "Acacia Planks",
+    "displayName": "Acacia Wood Plank",
     "name": "acacia_planks",
     "stackSize": 64
   },
   {
     "id": 20,
-    "displayName": "Dark Oak Planks",
+    "displayName": "Dark Oak Wood Plank",
     "name": "dark_oak_planks",
     "stackSize": 64
   },
   {
     "id": 21,
-    "displayName": "Crimson Planks",
+    "displayName": "Crimson Wood Plank",
     "name": "crimson_planks",
     "stackSize": 64
   },
   {
     "id": 22,
-    "displayName": "Warped Planks",
+    "displayName": "Warped Wood Plank",
     "name": "warped_planks",
     "stackSize": 64
   },
@@ -4297,97 +4297,97 @@
   },
   {
     "id": 716,
-    "displayName": "White Bed",
+    "displayName": "Bed",
     "name": "white_bed",
     "stackSize": 1
   },
   {
     "id": 717,
-    "displayName": "Orange Bed",
+    "displayName": "Bed",
     "name": "orange_bed",
     "stackSize": 1
   },
   {
     "id": 718,
-    "displayName": "Magenta Bed",
+    "displayName": "Bed",
     "name": "magenta_bed",
     "stackSize": 1
   },
   {
     "id": 719,
-    "displayName": "Light Blue Bed",
+    "displayName": "Bed",
     "name": "light_blue_bed",
     "stackSize": 1
   },
   {
     "id": 720,
-    "displayName": "Yellow Bed",
+    "displayName": "Bed",
     "name": "yellow_bed",
     "stackSize": 1
   },
   {
     "id": 721,
-    "displayName": "Lime Bed",
+    "displayName": "Bed",
     "name": "lime_bed",
     "stackSize": 1
   },
   {
     "id": 722,
-    "displayName": "Pink Bed",
+    "displayName": "Bed",
     "name": "pink_bed",
     "stackSize": 1
   },
   {
     "id": 723,
-    "displayName": "Gray Bed",
+    "displayName": "Bed",
     "name": "gray_bed",
     "stackSize": 1
   },
   {
     "id": 724,
-    "displayName": "Light Gray Bed",
+    "displayName": "Bed",
     "name": "light_gray_bed",
     "stackSize": 1
   },
   {
     "id": 725,
-    "displayName": "Cyan Bed",
+    "displayName": "Bed",
     "name": "cyan_bed",
     "stackSize": 1
   },
   {
     "id": 726,
-    "displayName": "Purple Bed",
+    "displayName": "Bed",
     "name": "purple_bed",
     "stackSize": 1
   },
   {
     "id": 727,
-    "displayName": "Blue Bed",
+    "displayName": "Bed",
     "name": "blue_bed",
     "stackSize": 1
   },
   {
     "id": 728,
-    "displayName": "Brown Bed",
+    "displayName": "Bed",
     "name": "brown_bed",
     "stackSize": 1
   },
   {
     "id": 729,
-    "displayName": "Green Bed",
+    "displayName": "Bed",
     "name": "green_bed",
     "stackSize": 1
   },
   {
     "id": 730,
-    "displayName": "Red Bed",
+    "displayName": "Bed",
     "name": "red_bed",
     "stackSize": 1
   },
   {
     "id": 731,
-    "displayName": "Black Bed",
+    "displayName": "Bed",
     "name": "black_bed",
     "stackSize": 1
   },

@@ -62,7 +62,8 @@ class Recipe extends Command {
         const ctx = canvas.getContext('2d')
         const background = await Canvas.loadImage('./utils/mc/images/crafting.png')
         ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
-        const result = await Canvas.loadImage(`data:image/png;base64,${minecraftItems.get(item.displayName).icon}`)
+        let icon = `data:image/png;base64,${minecraftItems.get(item.displayName).icon}`
+        const result = await Canvas.loadImage(icon)
         ctx.drawImage(result, 203, 52, 32, 32)
 
         await asyncForEach(recipe, async (_, line) => {
