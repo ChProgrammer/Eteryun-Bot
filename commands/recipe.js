@@ -1,10 +1,10 @@
 const Command = require('../strucutres/Command')
 const recipes = require('../utils/mc/recipes.json')
 const items = require('../utils/mc/items.json')
-const mcAssets = require('minecraft-assets')('1.16.1')
 const Discord = require('discord.js')
 const Canvas = require('canvas')
 const levenshtein = require('js-levenshtein')
+const minecraftItems = require('minecraft-items')
 
 async function asyncForEach(array, callback) {
     for (let index = 0; index < array.length; index++) {
@@ -62,7 +62,7 @@ class Recipe extends Command {
         const ctx = canvas.getContext('2d')
         const background = await Canvas.loadImage('./utils/mc/images/crafting.png')
         ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
-        const result = await Canvas.loadImage(mcAssets.textureContent[item.name].texture)
+        const result = await Canvas.loadImage(`data:image/png;base64,${minecraftItems.get(item.displayName).icon}`)
         ctx.drawImage(result, 203, 52, 32, 32)
 
         await asyncForEach(recipe, async (_, line) => {
@@ -70,7 +70,8 @@ class Recipe extends Command {
             await asyncForEach(_, async (item, slot) => {
                 slot = (slot * 2) + 1
                 if (item) {
-                    let texture = await Canvas.loadImage(mcAssets.textureContent[item.name].texture)
+                    let icon = `data:image/png;base64,${minecraftItems.get(item.displayName).icon}`
+                    let texture = await Canvas.loadImage(icon)
                     ctx.drawImage(texture, 18 * slot, 18 * line, 28, 28)
                 }
             })
