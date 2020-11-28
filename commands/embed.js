@@ -130,8 +130,20 @@ class Embed extends Command {
 
                 embed.setFooter(footerText, footerIcon.toLowerCase() == 'pular' ? '' : footerIcon)
             }
+                
+            let markEveryone;
+            do {
+                markEveryone = await sendQuestion('Embed', '> Deseja marcar Everyone na sua mensagem? (Sim/Não)', channel, author)
+            } while (!(markEveryone.toLowerCase() == 'sim' || markEveryone.toLowerCase() == 'não'))
+                
+            if(markEveryone.toLowerCase() == 'sim'){
+                await channelEmbed.send("@everyone").then(msg => {
+                    msg.delete({ timeout: 1000 });
+                })
+            }
 
-            await channelEmbed.send(embed)
+            await channelEmbed.send(embed);
+            return message.reply("Sua embed foi enviada com sucesso!");
 
         } catch (error) {
             console.log(error)
