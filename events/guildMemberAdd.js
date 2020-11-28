@@ -2,13 +2,15 @@ const Discord = require("discord.js")
 const moment = require('moment-timezone')
 
 module.exports = async function onMemberGuildAdd(member) {
-  const daysSinceCreation = moment().diff(moment(member.user.createdAt), 'days')
-  //const isDefaultAvatar = message.member.user.displayAvatarURL().startsWith('https://discordapp.com/')
-  if (daysSinceCreation < 30)
-    return (() => {
-      member.send('Olá! você foi kickado automaticamente por conter menos de 30 dias de conta').catch()
-      member.kick('Autokick: Usuário com menos de 30 dias no discord').catch()
-    })()
+  if(!member.user.bot){
+    const daysSinceCreation = moment().diff(moment(member.user.createdAt), 'days')
+    //const isDefaultAvatar = message.member.user.displayAvatarURL().startsWith('https://discordapp.com/')
+    if (daysSinceCreation < 30)
+      return (() => {
+        member.send('Olá, Você foi kickado automaticamente por conter menos de 30 dias de conta!').catch()
+        member.kick('Autokick: Usuário com menos de 30 dias no discord').catch()
+      })()
+  }
 
   const emoji = member.guild.emojis.cache.find(r => r.name == 'dancing_parrot')
   
