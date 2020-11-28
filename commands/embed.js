@@ -89,11 +89,11 @@ class Embed extends Command {
                 fieldInLine = await this.sendQuestion('Embed', '> Deseja adicionar um campo InLine? (Sim/Não)', channel, author)
             } while (!(fieldInLine.toLowerCase() == 'sim' || fieldInLine.toLowerCase() == 'não'))
 
-            if (fieldInLine.toLowerCase() == 'sim'){
+            if (fieldInLine.toLowerCase() == 'sim') {
                 do {
                     let inlineName = await this.sendQuestion('Embed', '> Digite o nome do campo Inline:', channel, author, true)
                     let inline = await this.sendQuestion('Embed', '> Digite a mensagem do campo Inline:', channel, author, true)
-                    if (inlineName != 'pular' || inline.toLowerCase != 'pular'){
+                    if (inlineName != 'pular' || inline.toLowerCase != 'pular') {
                         embed.addField(inlineName, inline, true)
                     }
                     fieldLoop = await this.sendQuestion('Embed', '> Deseja adicionar outro inline? (Sim/Não)', channel, author)
@@ -131,7 +131,13 @@ class Embed extends Command {
                 embed.setFooter(footerText, footerIcon.toLowerCase() == 'pular' ? '' : footerIcon)
             }
 
-            await channelEmbed.send(embed)
+            let mentionEveryone
+            do {
+                mentionEveryone = await this.sendQuestion('Embed', '> Deseja mencionar todos em sua mensagem? (Sim/Não)', channel, author)
+            } while (!(mentionEveryone.toLowerCase() == 'sim' || mentionEveryone.toLowerCase() == 'não'))
+
+
+            await channelEmbed.send(embed).then(() => mentionEveryone.toLowerCase() == 'sim' && channelEmbed.send('@everyone').then(msg => msg.delete()))
 
         } catch (error) {
             console.log(error)
