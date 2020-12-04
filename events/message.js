@@ -2,7 +2,7 @@ module.exports = async function onMessage(message) {
   // Get 
   const mentionClient = (message.guild ? message.guild.me.toString() : this.user.toString()) + ' '
   const prefix = message.content.startsWith(mentionClient) ? mentionClient : (this.config.prefix && message.content.startsWith(this.config.prefix)) ? this.config.prefix : null
-  if (message.content.includes('discord.gg/' || 'discordapp.com/invite/' || 'discord.me')) return message.delete()
+  if (!message.member.hasPermission("ADMINISTRATOR") && (message.content.includes('discord.gg/' || 'discordapp.com/invite/' || 'discord.me'))) return message.delete()
 
   let channel = this.config.channels.sugestions.make.find(item => item == message.channel.id)
   // message.channel.id == this.config.channels.sugestions.make
